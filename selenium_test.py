@@ -1,32 +1,11 @@
-# from selenium import webdriver
-#
-# driver=webdriver.Chrome()
-#
-# driver.get("https://www.python.org")
-#
-# print(driver.title)
-# print(driver.current_url)
-#
-# driver.quit()
-
-
-
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
-options = Options()
-options.binary_location = "/usr/bin/chromium"
+# This automatically downloads and matches the driver version to your browser version
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service)
 
-service = Service("/usr/bin/chromedriver")
-
-driver = webdriver.Chrome(
-    service=service,
-    options=options
-)
-
-driver.get("https://www.python.org")
-
-print("Page title:", driver.title)
-
+driver.get("https://google.com")
+print(driver.title)
 driver.quit()
